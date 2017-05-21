@@ -25,6 +25,14 @@ export default {
     // types: boolean, object
     description: "flag to enable offline usage via appcache and service worker",
   },
+  "offline": {
+    // types: boolean, object
+    description: "flag to enable offline usage via appcache and service worker",
+  },
+  "disableServiceWorkerReload":{
+    description: "flag to disable window.location.reload when service worker refreshed",
+    default: false,
+  },
   "force-offline": {
     type: "boolean",
     description: "flag to force offline mode (for development)",
