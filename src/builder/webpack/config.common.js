@@ -26,7 +26,10 @@ export default (config: PhenomicConfig): WebpackConfig => {
           ? "production"
           : process.env.NODE_ENV
         ),
-
+        // fix https://github.com/MoOx/phenomic/issues/1018
+        PHENOMIC_DISABLE_SW_RELOAD: wrap(
+          config.disableServiceWorkerReload
+        ),
         PHENOMIC_USER_PATHNAME: wrap(process.env.PHENOMIC_USER_PATHNAME),
         PHENOMIC_USER_URL: wrap(url.format(config.baseUrl)),
         PHENOMIC_NAME: wrap(pkg.name[0].toUpperCase() + pkg.name.slice(1)),
