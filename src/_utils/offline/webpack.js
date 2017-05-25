@@ -75,6 +75,7 @@ export const offlinePlugin = (config: PhenomicConfig): Array<Object> => {
       ServiceWorker: {
         events: true,
         navigateFallbackURL: "/",
+        navigateFallbackForRedirects: false,
       },
 
       // Appcache Fallback for browser that does not support Service Worker
