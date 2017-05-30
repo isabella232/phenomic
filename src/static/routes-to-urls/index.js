@@ -166,7 +166,7 @@ export default (
       "Phenomic can only handle one splat (*) in react-router routes. \n" +
       "You must use only one splat. If you have a specific need, do not "+
       "hesitate to open an issue at " +
-      "https://github.com/MoOx/phenomic/issues/new"
+      "https://github.com/MoOx/phenomic-serverless/issues/new"
     )
   }
 

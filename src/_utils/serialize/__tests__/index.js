@@ -31,9 +31,9 @@ test("serialize JS object", (t) => {
 })
 */
 
-// https://github.com/MoOx/phenomic/issues/397
+// https://github.com/MoOx/phenomic-serverless/issues/397
 // blocked by
-// https://github.com/MoOx/phenomic/issues/434
+// https://github.com/MoOx/phenomic-serverless/issues/434
 // and also
 // https://github.com/yahoo/serialize-javascript/pull/16
 /*

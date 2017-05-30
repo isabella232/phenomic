@@ -3,12 +3,12 @@ import jsonFetch from "simple-json-fetch"
 
 import pathToUri from "../../_utils/path-to-uri"
 
-export const NOOP = "phenomic/pages/NOOP"
-export const GET = "phenomic/pages/GET"
-export const SET = "phenomic/pages/SET"
-export const SET_TYPE = "phenomic/pages/SET_TYPE"
-export const FORGET = "phenomic/pages/FORGET"
-export const ERROR = "phenomic/pages/ERROR"
+export const NOOP = "phenomic-serverless/pages/NOOP"
+export const GET = "phenomic-serverless/pages/GET"
+export const SET = "phenomic-serverless/pages/SET"
+export const SET_TYPE = "phenomic-serverless/pages/SET_TYPE"
+export const FORGET = "phenomic-serverless/pages/FORGET"
+export const ERROR = "phenomic-serverless/pages/ERROR"
 
 // redux reducer
 export default function reducer(

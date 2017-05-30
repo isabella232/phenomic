@@ -24,7 +24,7 @@ export default function config({ argv = [], pkg = {} } = {}) {
   // validate user parameters
   const errors = [
     ...minimalValidator(userJSConfig, definitions),
-    // https://github.com/MoOx/phenomic/issues/363
+    // https://github.com/MoOx/phenomic-serverless/issues/363
     // ...minimalValidator(defaultAndCLIconfig, definitions),
   ]
 

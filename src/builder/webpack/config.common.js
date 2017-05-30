@@ -26,7 +26,7 @@ export default (config: PhenomicConfig): WebpackConfig => {
           ? "production"
           : process.env.NODE_ENV
         ),
-        // fix https://github.com/MoOx/phenomic/issues/1018
+        // fix https://github.com/MoOx/phenomic-serverless/issues/1018
         PHENOMIC_DISABLE_SW_RELOAD: wrap(
           config.disableServiceWorkerReload
         ),

@@ -124,7 +124,7 @@ export default (config) => {
 
     // fallback to index for unknow pages?
     router.use(historyFallbackMiddleware({
-      // https://github.com/MoOx/phenomic/issues/808
+      // https://github.com/MoOx/phenomic-serverless/issues/808
       disableDotRule: true,
     }))
 

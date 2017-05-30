@@ -12,7 +12,7 @@ export default (config: PhenomicConfig): Array<any> => {
   }
 
   const cacheDir = findCacheDir({
-    name: "phenomic/webpack-hard-source-cache/[confighash]/",
+    name: "phenomic-serverless/webpack-hard-source-cache/[confighash]/",
   })
 
   return [

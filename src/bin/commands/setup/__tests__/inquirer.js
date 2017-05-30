@@ -10,7 +10,7 @@ it("should works with inquirer API", () => new Promise((resolve, reject) => {
     [ join(__dirname, "./fixtures/spawn-prompt.js") ],
     { debug: fs.createWriteStream(join(__dirname, "debug.txt")) }
   )
-  .when(/In 1 word describe phenomic/, "Awesome\n")
+  .when(/In 1 word describe phenomic-serverless/, "Awesome\n")
   .on("error", function(error) {
     reject(error)
   })

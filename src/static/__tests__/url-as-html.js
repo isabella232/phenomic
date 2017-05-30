@@ -161,7 +161,7 @@ test("baseUrl with offline support", async (t) => {
       }
     }
   </script>
-  <script src="/phenomic/test.js"></script>
+  <script src="/phenomic-serverless/test.js"></script>
 </body>
 
 </html>`)
