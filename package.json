@@ -1,6 +1,6 @@
 {
   "name": "phenomic-serverless",
-  "version": "0.21.5",
+  "version": "0.21.6",
   "description": "Modern website generator based on the React and Webpack ecosystem.",
   "keywords": [
     "webpack",
@@ -144,7 +144,7 @@
     "webpack": "^2.3.0"
   },
   "scripts": {
-    "postinstall": "node npm/postinstall.js",
+    "disabled-postinstall": "node npm/postinstall.js",
     "local-transpile": "babel --ignore __tests__ --copy-files src --out-dir ../new-site/node_modules/phenomic-serverless/lib",
     "transpile": "babel --ignore __tests__ --copy-files src --out-dir lib",
     "prepublish": "rimraf lib && npm run transpile",
