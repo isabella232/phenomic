@@ -61,9 +61,9 @@ function adjustCurrentUrl(location: Object, item: Object, props: Props): void {
   const itemURL = item.__url + location.search + location.hash
 
   if (currentExactPageUrl !== itemURL) {
-    props.logger.info(
-      `${ logPrefix } replacing by '${ currentExactPageUrl }' to '${ itemURL }'`
-    )
+    // props.logger.info(
+    //   `${ logPrefix } replacing by '${ currentExactPageUrl }' to '${ itemURL }'`
+    // )
     if (browserHistory) {
       browserHistory.replace(itemURL)
     }
@@ -240,9 +240,11 @@ class PageContainer extends Component<DefaultProps, Props, void> {
       typeof page !== "object" ||
       page.toString() !== "[object Object]"
     ) {
-      props.logger.info(
-        `${ logPrefix } page ${ pageUrl } should be an object`
-      )
+      if (process.env.NODE_ENV !== "production") {
+        props.logger.info(
+          `${ logPrefix } page ${ pageUrl } should be an object`
+        )
+      }
       return null
     }
     const PageLoading = getLayout("PageLoading", props)
