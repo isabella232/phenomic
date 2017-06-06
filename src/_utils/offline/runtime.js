@@ -26,9 +26,19 @@ offlinePluginRuntime.install({
       const anchors = document.getElementsByTagName("a")
       for (let i = 0; i < anchors.length; i++) {
         anchors[i].onclick = function(e) {
+          if (e.target && e.target.href) {
+            const baseTargetURL = e.target.href.split(/[?#]/)[0]
+            const baseURL = window.location.href.split(/[?#]/)[0]
+            if (baseURL === baseTargetURL) {
+              console.log('current url stay on page')
+              // return false
+            }
+          }
+          // else
           e.preventDefault()
-          // stop react router and just hard reload the clicked href to get new contents
-          window.location.href = e.target.href
+          // stop react router and hard reload the clicked href to new content
+          const url = e.target.href || "/"
+          window.location.href = url
           return false
         }
       }
