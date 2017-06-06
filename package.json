@@ -1,6 +1,6 @@
 {
   "name": "phenomic-serverless",
-  "version": "0.21.6",
+  "version": "0.21.7",
   "description": "Modern website generator based on the React and Webpack ecosystem.",
   "keywords": [
     "webpack",
