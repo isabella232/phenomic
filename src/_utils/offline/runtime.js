@@ -4,6 +4,15 @@
 // operation and if main code fails, we do not want it installed
 import offlinePluginRuntime from "offline-plugin/runtime"
 
+function findUpTag(el, tag) {
+  while (el.parentNode) {
+    el = el.parentNode;
+    if (el.tagName === tag)
+        return el;
+  }
+  return null;
+}
+
 // console.log("SW Event:", "Installing")
 offlinePluginRuntime.install({
   // you can specify here some code to respond to events
@@ -26,8 +35,15 @@ offlinePluginRuntime.install({
       const anchors = document.getElementsByTagName("a")
       for (let i = 0; i < anchors.length; i++) {
         anchors[i].onclick = function(e) {
-          if (e.target && e.target.href) {
-            const baseTargetURL = e.target.href.split(/[?#]/)[0]
+          let link
+          if (e.target.tagName === 'A') {
+            link = e.target
+          } else {
+            link = findUpTag(e.target, 'A')
+          }
+
+          if (link && link.href) {
+            const baseTargetURL = link.href.split(/[?#]/)[0]
             const baseURL = window.location.href.split(/[?#]/)[0]
             if (baseURL === baseTargetURL) {
               console.log('current url stay on page')
@@ -37,7 +53,7 @@ offlinePluginRuntime.install({
           // else
           e.preventDefault()
           // stop react router and hard reload the clicked href to new content
-          const url = e.target.href || "/"
+          const url = link.href || "/"
           window.location.href = url
           return false
         }
