@@ -173,12 +173,9 @@ class PageContainer extends Component<DefaultProps, Props, void> {
   preparePage(props: Props, context: Context): void {
     console.log(props.params.splat)
     let theUrl = props.params.splat
-
-    if (props.params.splat.match(/http\:/)) {
-      // if using optimizely this fixes it
-      const baseURL = process.env.PHENOMIC_USER_URL
-      const cleanBase = baseURL.substring(0, baseURL.length - 1);
-      theUrl = theUrl.replace(cleanBase, "")
+    if (props.params.splat.match(/https?\:/)) {
+      // Fix for optimizely URLS
+      theUrl = theUrl.replace(/^(?:https?:\/\/)(?:[^@\/\n]+@)?(?:www\.)?([^:\/\n]+)/, '')
     }
 
     const pageUrl = splatToUrl(theUrl)
