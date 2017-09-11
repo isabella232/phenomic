@@ -171,7 +171,17 @@ class PageContainer extends Component<DefaultProps, Props, void> {
   }
 
   preparePage(props: Props, context: Context): void {
-    const pageUrl = splatToUrl(props.params.splat)
+    console.log(props.params.splat)
+    let theUrl = props.params.splat
+
+    if (props.params.splat.match(/http\:/)) {
+      // if using optimizely this fixes it
+      const baseURL = process.env.PHENOMIC_USER_URL
+      const cleanBase = baseURL.substring(0, baseURL.length - 1);
+      theUrl = theUrl.replace(cleanBase, "")
+    }
+
+    const pageUrl = splatToUrl(theUrl)
     if (process.env.NODE_ENV !== "production") {
       props.logger.info(
         `${ logPrefix } '${ pageUrl }' rendering...`
