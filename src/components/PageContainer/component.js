@@ -44,7 +44,7 @@ function find(
   return collection.find((item) => (
     item.__url === pageUrl ||
     item.__url === pageUrl + "/" ||
-    item.__resourceUrl === pageUrl
+    `${item.__url}index.html` === pageUrl
   ))
 }
 
@@ -171,7 +171,7 @@ class PageContainer extends Component<DefaultProps, Props, void> {
   }
 
   preparePage(props: Props, context: Context): void {
-    console.log(props.params.splat)
+    //console.log(props.params.splat)
     let theUrl = props.params.splat
     if (props.params.splat.match(/https?\:/)) {
       // Fix for optimizely URLS
@@ -184,7 +184,7 @@ class PageContainer extends Component<DefaultProps, Props, void> {
         `${ logPrefix } '${ pageUrl }' rendering...`
       )
     }
-
+    //console.log('pageUrl', pageUrl)
     const item = find(context.collection, pageUrl)
     if (
       typeof window !== "undefined" &&
@@ -195,18 +195,21 @@ class PageContainer extends Component<DefaultProps, Props, void> {
     }
 
     const page = props.pages[pageUrl]
+    //console.log('has page', page)
     if (!page) {
+      //console.log('no page item', item)
       if (item) {
-        props.getPage(item.__url, item.__dataUrl)
-      }
-      else {
+        const cleanData = item.__dataUrl.replace(/\/(.*)index.html/g, '')
+        const dataURL = `${item.__url}index.html${cleanData}`
+        props.getPage(item.__url, dataURL)
+      } else {
         props.logger.error(
-          `${ logPrefix } ${ pageUrl } is a page not found.`
+          `${ pageUrl } is a page not found. Please try again or contact us`
         )
+        //console.log('404 run setPageNotFound with pageUrl', pageUrl)
         props.setPageNotFound(pageUrl)
       }
-    }
-    else {
+    } else {
       if (page.error) {
         return
       }
@@ -255,7 +258,9 @@ class PageContainer extends Component<DefaultProps, Props, void> {
       return null
     }
     const PageLoading = getLayout("PageLoading", props)
+    // console.log('props', props)
     const PageError = getLayout("PageError", props)
+    // console.log('has error page', PageError)
     const LayoutFallback = getLayout(props.defaultLayout, props)
     const Layout = getLayout(
       (
@@ -267,6 +272,7 @@ class PageContainer extends Component<DefaultProps, Props, void> {
     ) || LayoutFallback
 
     if (page.error) {
+      //console.log('page.error', page.error)
       if (!PageError) {
         return (
           <div style={{ "text-align": "center" }}>
@@ -275,6 +281,7 @@ class PageContainer extends Component<DefaultProps, Props, void> {
           </div>
         )
       }
+      // console.log('page to error page', page)
       return <PageError { ...page } />
     }
     else if (

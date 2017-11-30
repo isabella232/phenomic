@@ -7,12 +7,20 @@ export default (
       `minify expect a valid collection instead of ${ typeof collection }`
     )
   }
+  /* Controls static build object */
+  return collection.map((item) => {
+    const dataFile = item.__dataUrl.replace(/\/(.*)index.html/g, '')
+    const headItems = item.head || {}
 
-  return collection.map((item) => ({
-    ...item.head,
-    __filename: item.__filename,
-    __url: item.__url,
-    __resourceUrl: item.__resourceUrl,
-    __dataUrl: item.__dataUrl,
-  }))
+    // remove description
+    // delete headItems.description
+
+    return {
+      ...headItems,
+      __filename: item.__filename,
+      __url: item.__url,
+      // __resourceUrl: item.__resourceUrl,
+      __dataUrl: dataFile,
+    }
+  })
 }

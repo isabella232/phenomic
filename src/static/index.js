@@ -81,11 +81,18 @@ export function writeAllHTMLFiles(
   return Promise.all(
     urls.map((url) => {
       const item = collection.find((item) => item.__url === url)
-      const filename = decodeURIComponent(
-        item
-        ? path.join(destination, item.__resourceUrl)
-        : path.join(destination, urlify(url, true))
-      )
+      let newFileName
+      if (item) {
+        if(item.__filename === '404.md') {
+          newFileName = path.join(destination, `404.html`)
+        } else {
+          newFileName = path.join(destination, `${item.__url}index.html`)
+        }
+      } else {
+        newFileName = path.join(destination, urlify(url, true))
+      }
+
+      const filename = decodeURIComponent(newFileName)
       setPageData(url, collection, store)
       return (
         urlAsHtml(url, options, Html, testing)

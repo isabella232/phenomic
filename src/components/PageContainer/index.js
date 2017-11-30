@@ -12,7 +12,10 @@ export default connect(
   (dispatch) => {
     return {
       getPage: (...args) => dispatch(pageActions.get(...args)),
-      setPageNotFound: (...args) => dispatch(pageActions.setNotFound(...args)),
+      setPageNotFound: (...args) => {
+        // console.log('run setPageNotFound', arguments)
+        dispatch(pageActions.setNotFound(...args))
+      },
     }
   },
 )(PageContainer)

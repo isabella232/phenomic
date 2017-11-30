@@ -145,7 +145,7 @@
   },
   "scripts": {
     "disabled-postinstall": "node npm/postinstall.js",
-    "local-transpile": "babel --ignore __tests__ --copy-files src --out-dir ../new-site/node_modules/phenomic-serverless/lib",
+    "local-transpile": "babel --ignore __tests__ --copy-files src --out-dir ../site/node_modules/phenomic-serverless/lib",
     "transpile": "babel --ignore __tests__ --copy-files src --out-dir lib",
     "prepublish": "rimraf lib && npm run transpile",
     "#lint:js:eslint": "https://github.com/eslint/eslint/issues/5679",

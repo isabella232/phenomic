@@ -62,13 +62,18 @@ const loader = function(input: string) {
   const url = urlify(tmpUrl)
   const resourceUrl = urlify(tmpUrl, true)
   const contentHash = loaderUtils.getHashDigest(input)
+  // DW: old full URL
   const dataUrl = resourceUrl + "." + contentHash + ".json"
+  // new small dataUrl
+  const dataFile = "." + contentHash + ".json"
+  // console.log('build with ', dataFile)
 
+  /* Base meta data in __COLLECTION__ */
   const metadata = {
     __filename: pathToUri(relativePath),
     __url: pathToUri("/", url),
-    __resourceUrl: pathToUri("/", resourceUrl),
-    __dataUrl: pathToUri("/", dataUrl),
+    // __resourceUrl: pathToUri("/", resourceUrl),
+    __dataUrl: dataFile,
   }
 
   const result = {
