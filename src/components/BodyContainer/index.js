@@ -2,8 +2,12 @@
 
 import React, { Component } from "react"
 import { renderToString } from "react-dom/server"
-// react showdown for markdown component rendering
 let Showdown
+//if (typeof window !== 'undefined') {
+  Showdown = require('react-showdown') // eslint-disable-line
+//}
+
+console.log('Showdown', Showdown)
 
 type Props = {
   children: React$Element<any>
@@ -18,7 +22,7 @@ class BodyContainer extends Component<void, Props, void> {
 
   render(): React$Element<any> {
     const { props }: { props: Props } = this
-    const { children, ...otherProps } = props
+    const { children, components, ...otherProps } = props
 
     let child
     if (typeof children === "string") {
@@ -34,19 +38,18 @@ class BodyContainer extends Component<void, Props, void> {
 
     if (child) {
       // Is markdown string. Parse it for components
+
       if (typeof window !== 'undefined') {
-       if (props.components) {
-         Showdown = require('react-showdown')
+       if (components) {
          return (
-           <Showdown.Markdown markup={ child } components={props.components} />
+           <Showdown.Markdown markup={ child } components={components} />
          )
        }
       }
       if (typeof window === 'undefined') {
-        if (props.components) {
-          Showdown = require('react-showdown')
+        if (components) {
           child = (
-            <Showdown.Markdown markup={ child } components={props.components} />
+            <Showdown.Markdown markup={ child } components={components} />
           )
           // then SSR it
           child = renderToString(child)

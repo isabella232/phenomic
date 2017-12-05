@@ -34,19 +34,23 @@ export default function phenomic({
     ? window.__COLLECTION__
     : []
 
-  ReactDOM.render(
-    <PhenomicContextProvider
-      collection={ collection }
-      metadata={ metadata }
-    >
-      <ReduxContextProvider store={ store }>
-        <Router
-          history={ browserHistory }
-          routes={ routes }
-          render={ applyRouterMiddleware(useScroll(shouldUpdateScroll)) }
-        />
-      </ReduxContextProvider>
-    </PhenomicContextProvider>,
-    document.getElementById("phenomic")
-  )
+  setTimeout(() => {
+    console.log('bootstrap')
+    ReactDOM.render(
+      <PhenomicContextProvider
+        collection={ collection }
+        metadata={ metadata }
+      >
+        <ReduxContextProvider store={ store }>
+          <Router
+            history={ browserHistory }
+            routes={ routes }
+            render={ applyRouterMiddleware(useScroll(shouldUpdateScroll)) }
+          />
+        </ReduxContextProvider>
+      </PhenomicContextProvider>,
+      document.getElementById("phenomic")
+    )
+  }, 0);
+
 }
