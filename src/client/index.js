@@ -34,8 +34,8 @@ export default function phenomic({
     ? window.__COLLECTION__
     : []
 
-  setTimeout(() => {
-    console.log('bootstrap')
+  //setTimeout(() => {
+    //console.log('bootstrap')
     ReactDOM.render(
       <PhenomicContextProvider
         collection={ collection }
@@ -51,6 +51,6 @@ export default function phenomic({
       </PhenomicContextProvider>,
       document.getElementById("phenomic")
     )
-  }, 0);
+  //}, 0);
 
 }

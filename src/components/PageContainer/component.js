@@ -57,9 +57,12 @@ function getBase(location: Object): string {
 
 function adjustCurrentUrl(location: Object, item: Object, props: Props): void {
   // adjust url (eg: missing trailing slash)
-  const currentExactPageUrl = location.href.replace(getBase(location), "/")
-  const itemURL = item.__url + location.search + location.hash
 
+
+  const currentExactPageUrl = location.href.replace(getBase(location), "/")
+  // console.log('currentExactPageUrl', currentExactPageUrl)
+  const itemURL = item.__url + location.search + location.hash
+  // console.log('itemURL', itemURL)
   if (currentExactPageUrl !== itemURL) {
     // props.logger.info(
     //   `${ logPrefix } replacing by '${ currentExactPageUrl }' to '${ itemURL }'`
@@ -191,6 +194,7 @@ class PageContainer extends Component<DefaultProps, Props, void> {
       typeof window.location !== "undefined" &&
       item
     ) {
+
       adjustCurrentUrl(window.location, item, props)
     }
 
