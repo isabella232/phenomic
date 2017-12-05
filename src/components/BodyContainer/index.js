@@ -1,10 +1,18 @@
 // @flow
 
 import React, { Component } from "react"
+import { renderToString } from "react-dom/server"
+// react showdown for markdown component rendering
+let Showdown
 
 type Props = {
   children: React$Element<any>
 }
+
+console.log('load BodyContainer')
+
+// https://github.com/phenomic/phenomic/blob/master/packages/plugin-renderer-react/src/components/BodyRenderer.js
+// https://github.com/phenomic/phenomic/blob/master/examples/react-app-markdown-with-custom-components/App.js
 
 class BodyContainer extends Component<void, Props, void> {
 
@@ -15,8 +23,7 @@ class BodyContainer extends Component<void, Props, void> {
     let child
     if (typeof children === "string") {
       child = children
-    }
-    else {
+    } else {
       try {
         child = React.Children.only(children)
       }
@@ -26,6 +33,26 @@ class BodyContainer extends Component<void, Props, void> {
     }
 
     if (child) {
+      // Is markdown string. Parse it for components
+      if (typeof window !== 'undefined') {
+       if (props.components) {
+         Showdown = require('react-showdown')
+         return (
+           <Showdown.Markdown markup={ child } components={props.components} />
+         )
+       }
+      }
+      if (typeof window === 'undefined') {
+        if (props.components) {
+          Showdown = require('react-showdown')
+          child = (
+            <Showdown.Markdown markup={ child } components={props.components} />
+          )
+          // then SSR it
+          child = renderToString(child)
+        }
+      }
+
       return (
         <div
           className="phenomic-BodyContainer"
