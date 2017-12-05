@@ -7,7 +7,7 @@ let Showdown
   Showdown = require('react-showdown') // eslint-disable-line
 //}
 
-console.log('Showdown', Showdown)
+// console.log('Showdown', Showdown)
 
 type Props = {
   children: React$Element<any>
