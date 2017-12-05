@@ -75,7 +75,7 @@ export default function(config: Object): void {
     const webpackPromise = (webpackConfig): Promise<any> => (
       new Promise((resolve: Function, reject: Function) => {
         try {
-          console.log('webpackConfig', webpackConfig)
+          console.log('Start webpack')
           webpack(webpackConfig, log, resolve)
         }
         catch (e) {
